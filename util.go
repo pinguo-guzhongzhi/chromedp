@@ -70,6 +70,9 @@ func detectURL(urlstr string) string {
 	// then: curl http://127.0.0.1:9000/json/version
 	// and the debugger URL will be something like: ws://127.0.0.1:9000/devtools/browser/...
 	wsURL := result["webSocketDebuggerUrl"].(string)
+	if u.Query().Encode() != "" {
+		wsURL += "?" + u.Query().Encode()
+	}
 	return wsURL
 }
 
